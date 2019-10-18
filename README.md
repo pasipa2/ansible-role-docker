@@ -1,7 +1,7 @@
 hukuru-ansible-role-docker
 =========
 
-This role install and configure docker daemon.
+This role installs and configure docker daemon.
 
 Requirements
 ------------
@@ -16,7 +16,7 @@ Available variables are listed in default values (see `defaults/main.yml`):
 Dependencies
 ------------
 
-Only supported on Centos 7 systemd services
+Tested on Centos 7 only
 
 Example Playbook
 ----------------
