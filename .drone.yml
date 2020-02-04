@@ -8,5 +8,4 @@ steps:
     commands:
       - apk update
       - apk add --virtual build-deps gcc make
-      - make prepare
   
