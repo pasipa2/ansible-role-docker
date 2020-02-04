@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 ansible = "*"
-molecule = "*"
+molecule = {extras = ["digitalocean"],version = "*"}
 python-vagrant = "*"
 
 [requires]

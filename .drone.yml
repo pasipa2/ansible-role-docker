@@ -1,0 +1,12 @@
+---
+kind: pipeline
+name: default
+
+steps:
+  - name: prepare
+    image: python:3-alpine
+    commands:
+      - apk update
+      - apk add --virtual build-deps gcc make
+      - make prepare
+  
