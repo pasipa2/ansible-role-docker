@@ -4,8 +4,9 @@ name: default
 
 steps:
   - name: prepare
-    image: python:3-alpine
+    image: python:3
     commands:
-      - apk update
-      - apk add --virtual build-deps gcc make
+      - apt-get update
+      - apt-get install git build-essential libssl-dev zlib1g-dev ibbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev
+  
   
