@@ -8,5 +8,6 @@ steps:
     commands:
       - apt-get update
       - apt-get install git build-essential make -y
+      - make prepare
   
   
