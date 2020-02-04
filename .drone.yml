@@ -7,6 +7,6 @@ steps:
     image: python:3
     commands:
       - apt-get update
-      - apt-get install git build-essential
+      - apt-get install git build-essential make -y
   
   
