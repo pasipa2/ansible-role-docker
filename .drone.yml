@@ -1,13 +1,19 @@
 ---
 kind: pipeline
+type: exec
 name: default
+
+platform:
+  os: linux
+  arch: amd64
 
 steps:
   - name: prepare
-    image: python:3
     commands:
-      - apt-get update
+      - pipenv install 
       - apt-get install git build-essential make -y
       - make prepare
-  
+  - name: test
+    commands:
+      - make build
   
