@@ -26,7 +26,7 @@
       file:
         path: "{{ docker_data_root }}"
         state: directory
-        
+
     - name: manage docker daemon json
       template:
         src: daemon.json.j2
@@ -34,4 +34,3 @@
       notify: restart docker
 
   when: docker_configure | bool
-

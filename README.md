@@ -1,6 +1,8 @@
 hukuru-ansible-role-docker
 =========
 
+[![Build Status](https://build.dev.mad-tech-works.com/api/badges/hukuruio/ansible-role-docker/status.svg)](https://build.dev.mad-tech-works.com/hukuruio/ansible-role-docker)
+
 This role installs and configure docker daemon.
 
 Requirements
