@@ -10,7 +10,7 @@ platform:
 steps:
   - name: prepare
     commands:
-      - pipenv run molecule test
+      - molecule test
   # - name: test
   #   commands:
   #     - make build
