@@ -9,9 +9,8 @@ platform:
 
 steps:
   - name: prepare
-    environment:
-      - PATH: $PATH:/home/drone/miniconda3/bin
     commands:
+      - export PATH=$PATH:/home/drone/miniconda3/bin
       - molecule test
   # - name: test
   #   commands:
