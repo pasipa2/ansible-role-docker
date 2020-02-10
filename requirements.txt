@@ -1,3 +1,6 @@
 ansible
 molecule
 python-vagrant
+boto3
+boto
+molecule[ec2]

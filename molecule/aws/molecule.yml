@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: ec2
+lint:
+  name: yamllint
+platforms:
+  - name: instance
+    image_owner: 679593333241
+    image_name: "CentOS Linux 7 x86_64 HVM EBS ENA *"
+    instance_type: t2.micro
+    vpc_subnet_id: subnet-04477b0959af58d38
+    instance_tags:
+      destroy: true
+      created_by: molecule
+      name: ansible-role-docker
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  options:
+    v: true
+    sudo: true
+  lint:
+    name: flake8
