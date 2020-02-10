@@ -3,4 +3,4 @@
   hosts: all
   become: true
   roles:
-    - role: hukuru-ansible-role-docker
+    - role: ansible-role-docker
