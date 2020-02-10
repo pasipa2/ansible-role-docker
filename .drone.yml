@@ -10,7 +10,7 @@ platform:
 steps:
   - name: prepare
     commands:
-      - molecule test
+      - /home/drone/miniconda3/bin/molecule test
   # - name: test
   #   commands:
   #     - make build
