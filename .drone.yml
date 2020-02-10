@@ -10,8 +10,8 @@ platform:
 steps:
   - name: prepare
     commands:
-      - pipenv install --python /usr/bin/python
-  #     - make prepare
+      - pipenv install --ignore-pipfile
+      - pipenv run molecule test
   # - name: test
   #   commands:
   #     - make build
