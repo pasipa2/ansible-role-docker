@@ -10,7 +10,6 @@ platform:
 steps:
   - name: prepare
     commands:
-      - pipenv install --ignore-pipfile
       - pipenv run molecule test
   # - name: test
   #   commands:
