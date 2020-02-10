@@ -10,7 +10,7 @@ platform:
 steps:
   - name: prepare
     commands:
-      - pipenv install
+      - pipenv install --python /usr/bin/python
   #     - make prepare
   # - name: test
   #   commands:
