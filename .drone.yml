@@ -11,7 +11,7 @@ steps:
   - name: test
     commands:
       - export PATH=$PATH:/home/drone/miniconda3/bin
-      - ls
+      - molecule converge
   # - name: test
   #   commands:
   #     - make build
