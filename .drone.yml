@@ -9,8 +9,10 @@ platform:
 
 steps:
   - name: prepare
+    environment:
+      - PATH: $$PATH:/home/drone/miniconda3/bin
     commands:
-      - /home/drone/miniconda3/bin/molecule test
+      - molecule test
   # - name: test
   #   commands:
   #     - make build
