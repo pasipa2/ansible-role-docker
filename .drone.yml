@@ -10,7 +10,7 @@ platform:
 steps:
   - name: prepare
     commands:
-      - id 
+      - pipenv install
   #     - make prepare
   # - name: test
   #   commands:
