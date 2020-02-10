@@ -8,10 +8,10 @@ platform:
   arch: amd64
 
 steps:
-  - name: prepare
+  - name: test
     commands:
       - export PATH=$PATH:/home/drone/miniconda3/bin
-      - molecule test
+      - ls
   # - name: test
   #   commands:
   #     - make build
