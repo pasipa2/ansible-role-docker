@@ -17,6 +17,10 @@ platforms:
       name: ansible-role-docker
 provisioner:
   name: ansible
+  playbooks:
+    create: create.yml
+    converge: converge.yml
+    destroy: destroy.yml
   lint:
     name: ansible-lint
 verifier:

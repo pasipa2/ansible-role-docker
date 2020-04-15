@@ -6,6 +6,11 @@ workspace:
  path: /drone/ansible-role-docker
 
 steps:
+  - name: packages
+    image: hukuruio/molecule:latest
+    commands:
+      - pip install -r requirements.txt
+
   - name: prepare
     image: hukuruio/awscli:latest
     environment:
@@ -21,21 +26,17 @@ steps:
       - echo "export AWS_ACCESS_KEY_ID=$(cat /tmp/output.txt | jq .Credentials.AccessKeyId)" > build.properties
       - echo "export AWS_SECRET_ACCESS_KEY=$(cat /tmp/output.txt | jq .Credentials.SecretAccessKey)" >> build.properties
       - echo "export AWS_SESSION_TOKEN=$(cat /tmp/output.txt | jq .Credentials.SessionToken)" >> build.properties
+      - echo "export MOLECULE_INSTANCE_CONFIG=$${HOME}/instance_config.yml" >> build.properties
       - echo "export AWS_REGION=$${AWS_DEFAULT_REGION}" >> build.properties
 
   - name: build
     image: hukuruio/molecule:latest
-    # environment:
-    #   ANSIBLE_ROLES_PATH: /drone/src
     commands:
-      - pip install -r requirements.txt
       - eval $(cat build.properties)
       - molecule test --scenario-name aws 
 
   - name: cleanup
     image: hukuruio/molecule:latest 
-    # environment:
-    #   ANSIBLE_ROLES_PATH: /drone/src
     commands:
       - eval $(cat build.properties)
       - molecule destroy --scenario-name aws 
