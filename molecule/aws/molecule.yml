@@ -2,9 +2,9 @@
 dependency:
   name: galaxy
 driver:
-  name: ec2
-lint:
-  name: yamllint
+  name: delegated
+lint: |
+  yamllint .
 platforms:
   - name: instance
     image_owner: 679593333241

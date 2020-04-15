@@ -2,8 +2,8 @@
 kind: pipeline
 name: default
 
-#workspace:
-#  path: /drone/ansible-role-docker
+workspace:
+ path: /drone/ansible-role-docker
 
 steps:
   - name: prepare
@@ -25,8 +25,8 @@ steps:
 
   - name: build
     image: hukuruio/molecule:latest
-    environment:
-      ANSIBLE_ROLES_PATH: /drone/src
+    # environment:
+    #   ANSIBLE_ROLES_PATH: /drone/src
     commands:
       - pip install -r requirements.txt
       - eval $(cat build.properties)
@@ -34,8 +34,8 @@ steps:
 
   - name: cleanup
     image: hukuruio/molecule:latest 
-    environment:
-      ANSIBLE_ROLES_PATH: /drone/src
+    # environment:
+    #   ANSIBLE_ROLES_PATH: /drone/src
     commands:
       - eval $(cat build.properties)
       - molecule destroy --scenario-name aws 
