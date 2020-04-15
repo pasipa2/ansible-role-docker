@@ -16,6 +16,10 @@
             instance_conf: {}
             skip_instances: true
 
+    - name: dump out instance config
+      debug:
+        msg: "{{ instance_conf }}"
+
     - name: Destroy molecule instance(s)
       ec2:
         state: absent
