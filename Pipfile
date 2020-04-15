@@ -12,6 +12,8 @@ molecule = {extras = ["ec2"],version = "*"}
 python-vagrant = "*"
 boto = "*"
 botocore = "*"
+pytest = "*"
+testinfra = "*"
 
 [requires]
 python_version = "3.7"
