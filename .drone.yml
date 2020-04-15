@@ -6,11 +6,6 @@ workspace:
  path: /drone/ansible-role-docker
 
 steps:
-  - name: packages
-    image: hukuruio/molecule:latest
-    commands:
-      - pip install -r requirements.txt
-
   - name: prepare
     image: hukuruio/awscli:latest
     environment:
@@ -33,6 +28,7 @@ steps:
     image: hukuruio/molecule:latest
     commands:
       - eval $(cat build.properties)
+      - pip install pytest testinfra yamllint
       - molecule test --scenario-name aws 
 
   - name: cleanup
