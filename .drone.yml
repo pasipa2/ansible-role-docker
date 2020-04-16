@@ -28,7 +28,7 @@ steps:
     commands:
       - eval $(cat build.properties)
       - pip install pytest testinfra yamllint
-      - molecule --debug test --scenario-name aws 
+      - molecule test --scenario-name aws 
 
   - name: cleanup
     image: hukuruio/molecule:latest 
