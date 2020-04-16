@@ -5,7 +5,11 @@
     state: directory
   with_items:
     - /etc/systemd/system/docker.service.d
-    - /etc/docker
+    - "{{ docker_config_dir }}"
+
+- name: manage docker certs
+  include: docker_certs.yml
+  when: docker_tls | bool
 
 - name: Add override to ensure Docker can start in with daemon.json
   template:
@@ -30,7 +34,7 @@
     - name: manage docker daemon json
       template:
         src: daemon.json.j2
-        dest: /etc/docker/daemon.json
+        dest: "{{ docker_config_dir }}/daemon.json"
       notify: restart docker
 
   when: docker_configure | bool

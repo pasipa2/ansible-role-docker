@@ -4,34 +4,16 @@
   connection: local
   gather_facts: false
   no_log: "{{ molecule_no_log }}"
-  vars:
-    ssh_user: centos
-    ssh_port: 22
-
-    security_group_name: molecule-test
-    security_group_description: Security group for testing Molecule
-    security_group_rules:
-      - proto: tcp
-        from_port: "{{ ssh_port }}"
-        to_port: "{{ ssh_port }}"
-        cidr_ip: '0.0.0.0/0'
-      - proto: icmp
-        from_port: 8
-        to_port: -1
-        cidr_ip: '0.0.0.0/0'
-    security_group_rules_egress:
-      - proto: -1
-        from_port: 0
-        to_port: 0
-        cidr_ip: '0.0.0.0/0'
-
-    keypair_name: molecule_key
-    keypair_path: "{{ lookup('env', 'MOLECULE_EPHEMERAL_DIRECTORY') }}/ssh_key"
+  vars_files:
+    - vars/molecule.yml
   tasks:
+    - name: include helpers
+      include: helpers/self_signed.yml
+
     - name: Create security group
       ec2_group:
-        name: "{{ security_group_name }}"
-        description: "{{ security_group_name }}"
+        name: "{{ commmon_name }}"
+        description: "{{ commmon_name }}"
         rules: "{{ security_group_rules }}"
         rules_egress: "{{ security_group_rules_egress }}"
 
@@ -75,7 +57,7 @@
           else (ami_facts.results[index].images | sort(attribute='creation_date', reverse=True))[0].image_id }}"
         instance_type: "{{ item.instance_type }}"
         vpc_subnet_id: "{{ item.vpc_subnet_id }}"
-        group: "{{ security_group_name }}"
+        group: "{{ commmon_name }}"
         volumes:
         - device_name: /dev/sda1
           volume_type: gp2

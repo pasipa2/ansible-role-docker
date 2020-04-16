@@ -19,6 +19,7 @@ docker_yum_repo_enable_test: 0
 # Used for configuration of docker daemon
 docker_configure: true
 docker_data_root: "/opt/docker_data"
+docker_config_dir: /etc/docker
 
 # Docker Compose options.
 docker_install_compose: true
@@ -27,3 +28,13 @@ docker_compose_path: /usr/local/bin/docker-compose
 
 # A list of users who will be added to the docker group.
 docker_users: []
+
+# tls
+docker_tls: false
+docker_cert_dir: "{{ docker_config_dir }}/certs"
+docker_ca_cert_file: "{{ docker_cert_dir }}/ca.pem"
+docker_cert_file: "{{ docker_cert_dir }}/cert.pem"
+docker_key_file: "{{ docker_cert_dir }}/key.pem"
+docker_ca: ""
+docker_cert: ""
+docker_key: ""

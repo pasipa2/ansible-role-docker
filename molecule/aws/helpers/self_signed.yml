@@ -1,0 +1,55 @@
+---
+
+- name: Ensure python OpenSSL dependencies are installed.
+  pip:
+    name: cryptography
+    state: present
+
+- name: delete temp cert dir
+  file:
+    path: "{{ tmppath }}"
+    state: absent
+
+- name: Ensure directory exists for local self-signed TLS certs.
+  file:
+    path: "{{ tmppath }}"
+    state: directory
+    
+- name: Generate an CA private key.
+  openssl_privatekey:
+    path: "{{ tmppath }}/caKey.pem"
+
+- name: Generate an CA CSR.
+  openssl_csr:
+    path: "{{ tmppath }}/caReq.csr"
+    privatekey_path: "{{ tmppath }}/caKey.pem"
+    common_name: "testca"
+
+- name: Generate a Self Signed OpenSSL CA certificate.
+  openssl_certificate:
+    path: "{{ tmppath }}//caCert.pem"
+    privatekey_path: "{{ tmppath }}/caKey.pem"
+    csr_path: "{{ tmppath }}/caReq.csr"
+    selfsigned_not_after: +1d
+    provider: selfsigned
+
+- name: Generate an server private key.
+  openssl_privatekey:
+    path: "{{ tmppath }}/serverKey.pem"
+
+- name: Generate an server CSR.
+  openssl_csr:
+    path: "{{ tmppath }}/servereq.csr"
+    privatekey_path: "{{ tmppath }}/serverKey.pem"
+    common_name: "server"
+    subject_alt_name: 'DNS:*'
+
+- name: Generate a server certificate.
+  openssl_certificate:
+    path: "{{ tmppath }}//serverCert.pem"
+    privatekey_path: "{{ tmppath }}/serverKey.pem"
+    csr_path: "{{ tmppath }}/servereq.csr"
+    ownca_path: "{{ tmppath }}//caCert.pem"
+    ownca_privatekey_path: "{{ tmppath }}/caKey.pem"
+    ownca_not_after: +1d
+    provider: ownca

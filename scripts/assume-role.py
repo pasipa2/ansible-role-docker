@@ -4,7 +4,8 @@ import boto3
 
 region = 'eu-west-2'
 aws_profile_name = 'mad-dev-token'
-aws_role_arn = "arn:aws:iam::334576516458:role/admin"
+account_id = os.environ.get('ACCOUNT_ID')
+aws_role_arn = f"arn:aws:iam::${account_id}:role/admin"
 
 session = boto3.Session(profile_name=aws_profile_name)
 

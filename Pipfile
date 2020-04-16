@@ -17,6 +17,7 @@ testinfra = "*"
 boto3 = "*"
 ansible-lint = "*"
 flake8 = "*"
+cryptography = "*"
 
 [requires]
 python_version = "3.7"

@@ -4,6 +4,8 @@
   connection: local
   gather_facts: false
   no_log: "{{ molecule_no_log }}"
+  vars_files:
+    - vars/molecule.yml
   tasks:
     - block:
         - name: Populate instance config
@@ -33,6 +35,16 @@
       until: ec2_jobs.finished
       retries: 300
       with_items: "{{ server.results }}"
+
+    - name: delete temp cert dir
+      file:
+        path: "{{ tmppath }}"
+        state: absent
+
+    - name: Delete remote keypair
+      ec2_key:
+        name: "{{ keypair_name }}"
+        state: absent
 
     # Mandatory configuration for Molecule to function.
 

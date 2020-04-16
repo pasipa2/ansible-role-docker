@@ -1,5 +1,6 @@
 import os
 
+import pytest
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
@@ -16,21 +17,36 @@ def test_docker_running_and_enabled(host):
     docker = host.service("docker")
     assert docker.is_running
     assert docker.is_enabled
+    assert host.socket("tcp://0.0.0.0:2376").is_listening
 
 
-def test_docker_directories_exist(host):
-    docker_dirs = ['/opt/docker_data', '/etc/docker',
-                   '/etc/systemd/system/docker.service.d']
-    for dir in docker_dirs:
-        assert host.file(dir).is_directory
+@pytest.mark.parametrize(
+  "dir",
+  [
+    '/opt/docker_data',
+    '/etc/docker',
+    '/etc/docker/certs',
+    '/etc/systemd/system/docker.service.d'
+  ]
+)
+def test_docker_directories_exist(host, dir):
+    assert host.file(dir).is_directory
 
 
-def test_docker_config_files_exist(host):
-    docker_files = ['/etc/systemd/system/docker.service.d/docker.conf',
-                    '/etc/docker/daemon.json']
-    for fl in docker_files:
-        assert host.file(fl).is_file
-        assert host.file(fl).exists
+@pytest.mark.parametrize(
+  "dfile",
+  [
+    '/etc/docker/daemon.json',
+    '/etc/docker/certs/ca.pem',
+    '/etc/docker/certs/cert.pem',
+    '/etc/docker/certs/key.pem',
+    '/etc/systemd/system/docker.service.d/docker.conf',
+    '/bin/docker-compose'
+  ]
+)
+def test_docker_config_files_exist(host, dfile):
+    assert host.file(dfile).is_file
+    assert host.file(dfile).exists
 
 
 def test_docker_group_exists(host):
