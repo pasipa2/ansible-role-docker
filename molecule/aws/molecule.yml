@@ -7,7 +7,7 @@ lint: |
   set -e
   yamllint .
   ansible-lint
-  flake8
+  flake8 molecule/tests
 platforms:
   - name: instance
     image_owner: 679593333241

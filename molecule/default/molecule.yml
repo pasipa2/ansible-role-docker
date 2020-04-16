@@ -2,11 +2,10 @@
 dependency:
   name: galaxy
 driver:
-  name: vagrant
-  provider:
-    name: virtualbox
-lint:
-  name: yamllint
+  name: delegated
+lint: |
+  set -e
+  yamllint .
 platforms:
   - name: centos7
     box: centos/7

@@ -16,6 +16,7 @@ pytest = "*"
 testinfra = "*"
 boto3 = "*"
 ansible-lint = "*"
+flake8 = "*"
 
 [requires]
 python_version = "3.7"
