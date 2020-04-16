@@ -4,7 +4,10 @@ dependency:
 driver:
   name: delegated
 lint: |
+  set -e
   yamllint .
+  ansible-lint
+  flake8
 platforms:
   - name: instance
     image_owner: 679593333241
@@ -13,8 +16,8 @@ platforms:
     vpc_subnet_id: subnet-04477b0959af58d38
     instance_tags:
       destroy: true
-      created_by: molecule
-      name: ansible-role-docker
+      Created_by: molecule
+      Name: ansible-role-docker
 provisioner:
   name: ansible
   playbooks:
@@ -25,6 +28,7 @@ provisioner:
     name: ansible-lint
 verifier:
   name: testinfra
+  directory: ../tests
   options:
     v: true
     sudo: true
