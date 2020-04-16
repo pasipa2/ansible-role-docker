@@ -1,5 +1,5 @@
 ---
 docker_tls: true
-docker_ca: "{{ lookup('file', '/tmp/tls_certs/caCert.pem') }}"
-docker_cert: "{{ lookup('file', '/tmp/tls_certs/serverCert.pem') }}"
-docker_key: "{{ lookup('file', '/tmp/tls_certs/serverKey.pem') }}"
+docker_ca: "{{ lookup('file', '/tmp/ansible_temp_certs/caCert.pem') }}"
+docker_cert: "{{ lookup('file', '/tmp/ansible_temp_certs/serverCert.pem') }}"
+docker_key: "{{ lookup('file', '/tmp/ansible_temp_certs/serverKey.pem') }}"
