@@ -16,7 +16,7 @@ click-completion==0.5.2
 click-help-colors==0.8
 click==7.1.1
 colorama==0.4.3
-cookiecutter==1.7.0
+cookiecutter==2.1.1
 cryptography==2.9
 docutils==0.15.2
 entrypoints==0.3
